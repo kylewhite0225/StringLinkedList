@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "Node.h"
 using namespace std;
 
 /*
@@ -9,10 +10,10 @@ Date: 11/6/2020
 Description: Header file for the SLLString class, which defines
 the private members and all methods.
 */
-struct Node {
-    char data;
-    Node *next;
-};
+// struct Node {
+//     char data;
+//     Node *next;
+// };
 
 class SLLString
 {
@@ -24,7 +25,9 @@ public:
     SLLString();    // Default Constructor
     SLLString(const string& other);     // Copy constructor taking a string as parameter
     ~SLLString();   // Destructor
-    SLLString(const SLLString& other);  // Copy constructor taking another SLLString
+    // void copySLLString(const SLLString &otherSLLString);    // Deep copy function
+
+    SLLString(const SLLString &other);  // Copy constructor taking another SLLString
     SLLString& operator=(const SLLString& other);   // Assignment constructor
     SLLString& operator+=(const SLLString& other);  // Concatenation constructor
     int length();   // Return length of the SLLString
