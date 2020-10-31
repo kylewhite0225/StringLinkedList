@@ -2,7 +2,17 @@
 #include "SLLString.h"
 using namespace std;
 
-// Default Constructor
+/*
+Name: SLLString.h
+Author: Kyle White
+Date: 11/6/2020
+Description: The SLLString class implementation includes several methods:
+constructor, destructor, two copy constructors acepting a string and an SLLString
+object, overloaded assignment and concatenation constructors, overloaded bracket[]
+operator, erase which erases all instances of a char, length, insertNode, and AppendTail. 
+*/
+
+// Default constructor sets the head and tail fields to NULL, and the size to 0.
 SLLString::SLLString()
 {
     head = NULL;
@@ -22,7 +32,8 @@ SLLString::~SLLString()
     }
 }
 
-// Copy constructor accepting a string
+// Copy constructor accepting a string, which uses the AppendTail helper method
+// to construct an SLLString object.
 SLLString::SLLString(const string &other)
 {
     for (char c : other)
@@ -78,13 +89,13 @@ SLLString &SLLString::operator+=(const SLLString &other)
     return *this;
 }
 
-// Returns the length of the list
+// Returns the length of the list stored in the size field.
 int SLLString::length()
 {
     return size;
 }
 
-// Returns a reference to the character stored at index n
+// Overloads the [] operator and returns a reference to the character stored at index n
 char& SLLString::operator[](const int n) {
     Node *curr = new Node;
     curr = this->head;

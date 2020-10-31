@@ -8,7 +8,9 @@ Name: SLLString.h
 Author: Kyle White
 Date: 11/6/2020
 Description: Header file for the SLLString class, which defines
-the private members and all methods.
+the private members and all methods. The SLLString class is a singly-linked
+list maintaining a head and tail pointer, as well as an integer storing the size of the list.'
+SLLString objects store strings as singly linked lists.
 */
 
 class SLLString
@@ -33,13 +35,15 @@ public:
     int findSubstring(const string & substring); // Accepts a string and creates an SLLString
     // object, then calls the other version of findSubstring.
     void erase(char c); // Erase all occurrences of character c from the current string.
-    // support cout << operator
+    // Assigning the << operator as a friend allows iostream to print SLLString objects.
     friend ostream& operator<<(ostream& out, const SLLString & s) {
         for(Node* n = s.head; n != NULL; n = n->next) {
             out << n->data;
         }
         return out;
     }
+    // Constructs a node with the given character c and places it at the provided index in the list.
     Node* InsertNode(int index, char c);
+    // AppendTail is a helper function that appends a new node to the end of the linked list.
     void AppendTail(char c);
 };

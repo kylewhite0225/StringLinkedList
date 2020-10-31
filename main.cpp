@@ -3,6 +3,13 @@
 
 using namespace std;
 
+/*
+Name: main.cpp
+Author: Kyle White
+Date: 11/6/2020
+Description: The provided main.cpp function which tests the SLLString and Node classes.
+*/
+
 int main()
 {
     SLLString str("Hello world!");
