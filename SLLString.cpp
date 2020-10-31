@@ -2,6 +2,7 @@
 #include "SLLString.h"
 using namespace std;
 
+// Default Constructor
 SLLString::SLLString()
 {
     head = NULL;
@@ -9,45 +10,19 @@ SLLString::SLLString()
     size = 0;
 }
 
+// Destructor
 SLLString::~SLLString()
 {
-    Node *current = head;
-    while (current != NULL)
-    {
-        current = current->next;
-        delete head;
-        head = current;
+    Node* current = head;
+    while(current != 0) {
+        Node* next = current->next;
+        current = NULL;
+        delete current;
+        current = next;
     }
 }
 
-// // Deep copy function
-// void SLLString::copySLLString(const SLLString &otherSLLString)
-// {
-//     Node *head = new Node;
-//     Node *current = new Node;
-//     if (otherSLLString.head == NULL)
-//     {
-//         return;
-//     }
-//     Node *temp = otherSLLString.head;
-//     // head = new Node;
-//     head->data = temp->data;
-//     head->next = NULL;
-//     current = head;
-
-//     temp = temp->next;
-
-//     while (temp != NULL)
-//     {
-//         current->next = new Node;
-//         current = current->next;
-//         current->data = temp->data;
-//         current->next = NULL;
-//         temp = temp->next;
-//     }
-// }
-
-// copy constructor accepting a string
+// Copy constructor accepting a string
 SLLString::SLLString(const string &other)
 {
     for (char c : other)
@@ -56,7 +31,7 @@ SLLString::SLLString(const string &other)
     }
 }
 
-// copy constructor accepting another SLLString object
+// Copy constructor accepting another SLLString object
 SLLString::SLLString(const SLLString &other)
 {
     Node *curr = other.head;
@@ -127,7 +102,49 @@ char& SLLString::operator[](const int n) {
 // Returns the index of the start of the first occurence of a substring
 int SLLString::findSubstring(const SLLString &substring)
 {
-    return 1;
+    int index = 0;
+    Node *first = substring.head;
+    Node *second = this->head;
+    if (first == NULL && second == NULL) {
+        index = 0;
+        return index;
+    } else if (first == NULL || first != NULL && second == NULL) {
+        index = -1;
+        return index;
+    }
+    Node *p1 = first;
+    Node *p2 = second;
+    while (second != NULL) {
+        p2 = second;
+        while (p1 != NULL) {
+            if (p2 == NULL) {
+                index = -1;
+                return index;
+            } else if (p1->data == p2->data) {
+                p1 = p1->next;
+                p2 = p2->next;
+            } else {
+                break;
+            }
+        }
+        if (p1 == NULL) {
+            return index;
+        }
+        p1 = first;
+        second = second->next;
+        index++;
+    }
+
+    return index;
+}
+
+// Overloaded findSubstring function which creates a pointer to an SLLString
+// object created from the input constant reference to the string substring.
+int SLLString::findSubstring(const string &substring) 
+{
+    SLLString *s = new SLLString(substring);
+    int index = findSubstring(*s);
+    return index;
 }
 
 // Erases all instances of char c from the SLLString object
@@ -147,6 +164,7 @@ void SLLString::erase(char c)
     }
 }
 
+// Inserts a character c at the provided index.
 Node *SLLString::InsertNode(int index, char c)
 {
     if (index < 0)
@@ -182,6 +200,7 @@ Node *SLLString::InsertNode(int index, char c)
     return newNode;
 }
 
+// Helper function that appends a node to the tail of the linked list.
 void SLLString::AppendTail(char c)
 {
     if (head == NULL)
