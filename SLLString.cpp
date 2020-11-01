@@ -60,6 +60,7 @@ SLLString::SLLString(const SLLString &other)
 // Assignment constructor
 SLLString &SLLString::operator=(const SLLString &other)
 {
+    // If they are the same or other is null
     if (this == &other || other.head == NULL)
     {
         return *this;
@@ -77,7 +78,7 @@ SLLString &SLLString::operator=(const SLLString &other)
     return *this;
 }
 
-// Concatenation constructor
+// Concatenation constructor which uses the AppendTail helper function.
 SLLString &SLLString::operator+=(const SLLString &other)
 {
     Node *currNode = other.head;
@@ -178,6 +179,7 @@ void SLLString::erase(char c)
 // Inserts a character c at the provided index.
 Node *SLLString::InsertNode(int index, char c)
 {
+    // If out of bounds, return NULL
     if (index < 0)
         return NULL;
 
@@ -193,17 +195,19 @@ Node *SLLString::InsertNode(int index, char c)
 
     Node *newNode = new Node;
     newNode->data = c;
+    // If index is 0, or the head of the list
     if (index == 0)
     {
         newNode->next = head;
         head = newNode;
     }
-    else
+    else // If index is between 0 and the end of the list
     {
         newNode->next = prevNode->next;
         prevNode->next = newNode;
     }
     size++;
+    // If the provided index is the tail of the list
     if (index == size - 1)
     {
         tail = newNode;
@@ -214,11 +218,12 @@ Node *SLLString::InsertNode(int index, char c)
 // Helper function that appends a node to the tail of the linked list.
 void SLLString::AppendTail(char c)
 {
+    // If the list is empty, insert a node at the beginning of the list.
     if (head == NULL)
     {
         InsertNode(0, c);
     }
-    else
+    else // Else, create a new node and set the contents to char c and add it to the end.
     {
         Node *newNode = new Node;
         newNode->data = c;
