@@ -49,8 +49,6 @@ public:
         }
         return out;
     }
-    // Constructs a node with the given character c and places it at the provided index in the list.
-    Node* InsertNode(int index, char c);
     // AppendTail is a helper function that appends a new node to the end of the linked list.
     void AppendTail(char c);
 };

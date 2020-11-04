@@ -176,52 +176,18 @@ void SLLString::erase(char c)
     }
 }
 
-// Inserts a character c at the provided index.
-Node *SLLString::InsertNode(int index, char c)
-{
-    // If out of bounds, return NULL
-    if (index < 0)
-        return NULL;
-
-    int prevIndex = 0;
-    Node *prevNode = head;
-    while (prevNode != NULL && index - 1 > prevIndex)
-    {
-        prevNode = prevNode->next;
-        prevIndex++;
-    }
-    if (index > 0 && prevNode == NULL)
-        return NULL;
-
-    Node *newNode = new Node;
-    newNode->data = c;
-    // If index is 0, or the head of the list
-    if (index == 0)
-    {
-        newNode->next = head;
-        head = newNode;
-    }
-    else // If index is between 0 and the end of the list
-    {
-        newNode->next = prevNode->next;
-        prevNode->next = newNode;
-    }
-    size++;
-    // If the provided index is the tail of the list
-    if (index == size - 1)
-    {
-        tail = newNode;
-    }
-    return newNode;
-}
-
 // Helper function that appends a node to the tail of the linked list.
 void SLLString::AppendTail(char c)
 {
     // If the list is empty, insert a node at the beginning of the list.
     if (head == NULL)
     {
-        InsertNode(0, c);
+        Node *newNode = new Node;
+        newNode->data = c;
+        newNode->next = head;
+        head = newNode;
+        tail = newNode;
+        size++;
     }
     else // Else, create a new node and set the contents to char c and add it to the end.
     {
