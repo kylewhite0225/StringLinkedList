@@ -24,7 +24,7 @@ SLLString::SLLString()
 SLLString::~SLLString()
 {
     Node* current = head;
-    while(current != 0) {
+    while(current != NULL) {
         Node* next = current->next;
         current = NULL;
         delete current;
@@ -146,7 +146,6 @@ int SLLString::findSubstring(const SLLString &substring)
         second = second->next;
         index++;
     }
-
     return index;
 }
 
